@@ -1,0 +1,25 @@
+/* arial font */
+body {
+	font-family: Arial;
+}
+
+/* align headers */
+.centered {
+	text-align: center;
+}
+
+/* flexbox container */
+.container {
+  display: flex;
+}
+
+/* 60% column */
+#column1 {
+  flex: 60%;
+}
+
+/* 40% column */
+#column2 {
+	flex: 40%;
+}
+
