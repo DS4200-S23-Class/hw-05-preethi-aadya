@@ -3,79 +3,64 @@
 
 <head>
     <meta charset=utf-8/>
-
-    <!-- Add title for webpage -->
     <title>hw-05</title>
-
-    <!-- Link stylesheet -->
     <link rel="stylesheet" href="style.css">
-
-    <!-- Link to d3 library -->
     <script src="js/d3.v6.1.1/d3.min.js"></script>
 </head>
 
-
 <body>
-    <!-- centered header -->
-    <h1 class="centered">hw-05: Interactive Graph with D3</h1>
-
-    <!-- container class -->
-    <div class="container">
-        <!-- left column (60% column) -->
-        <div id="column1">
+    <h1>hw-05: Interactive Graph with D3</h1>
+    <div class="flex">
+        <!-- left column: 60% with visualizations -->
+        <div class = "left">
             <div id="vis1"></div>
+            <br>
             <div id="vis2"></div>
-            <div id="vis3"></div>
         </div>
 
-        <!-- right column (40% column) -->
-        <div id="column2">
-            <!-- last point clicked -->
-            <div id="lastPoint">
-                Last point clicked: 
-            </div>
-        
-            <div>
-                <!-- drop down for x values -->
-                <form id="x">
-                    <label for="points">Select x coordinate for the new point you want to add: </label>
-                    <!-- Dropdown list -->
-                    <select id="x_coord" name="points">
-                    <!-- Added options under select with 1 being the default --> 
-                    <option value="1"/>1</option>
-                    <option value="2"/>2</option>
-                    <option value="3"/>3</option>
-                    <option value="4"/>4</option>
-                    <option value="5"/>5</option>
-                    <option value="6"/>6</option>
-                    <option value="7"/>7</option>
-                    <option value="8"/>8</option>
-                    <option value="9"/>9</option>
-                    </select>
-
-                    <br>
-
-                    <label for="points">Select y coordinate for the new point you want to add: </label>
-                    <!-- dropdown for y values -->
-                    <select id="y_coord" name="points">
-                    <!-- Added options under select with 1 being the default --> 
-                    <option value="1"/>1</option>
-                    <option value="2"/>2</option>
-                    <option value="3"/>3</option>
-                    <option value="4"/>4</option>
-                    <option value="5"/>5</option>
-                    <option value="6"/>6</option>
-                    <option value="7"/>7</option>
-                    <option value="8"/>8</option>
-                    <option value="9"/>9</option>
-                    </select>
-                </form>
-
-                <!-- Create submit button -->
-                <button type="submit" id="subButton">Add Point</button>
-            </div>
+        <!-- right column: 40% with drop down tab -->
+        <div class="right">
+            <div id="recent_point"> Last Point Clicked: </div>  
+            <br>
+            <form> 
+                <!-- Drop down for x-coordinate -->
+                <label> x-coordinate </label>  
+                <select id="x-coord">  
+                    <option value = "1"> 1 </option>  
+                    <option value = "2"> 2 </option>  
+                    <option value = "3"> 3 </option> 
+                    <option value = "4"> 4 </option>
+                    <option value = "5"> 5 </option>
+                    <option value = "6"> 6 </option>
+                    <option value = "7"> 7 </option>
+                    <option value = "8"> 8 </option>
+                    <option value = "9"> 9 </option>
+                    <option value = "10"> 10 </option>
+                </select>   
+            </form>
+            <br>
+            <form>  
+                <!-- Drop down for y-coordinate -->
+                <label> y-coordinate </label> 
+                <select id="y-coord">  
+                    <option value = "1"> 1 </option>  
+                    <option value = "2"> 2 </option>  
+                    <option value = "3"> 3 </option> 
+                    <option value = "4"> 4 </option>
+                    <option value = "5"> 5 </option>
+                    <option value = "6"> 6 </option>
+                    <option value = "7"> 7 </option>
+                    <option value = "8"> 8 </option>
+                    <option value = "9"> 9 </option>
+                    <option value = "10"> 10 </option>
+                </select>   
+            </form> 
+            <br>
+            <button type="button" id="enter">Enter</button>
         </div>
     </div>
+
+    <div>
 
     <!-- Acknowledgements -->
     <h3 class="centered">Acknowledgements</h3>

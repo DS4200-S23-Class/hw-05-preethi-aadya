@@ -1,25 +1,50 @@
-/* arial font */
 body {
 	font-family: Arial;
-}
-
-/* align headers */
-.centered {
+  }
+  
+  h1, h2 {
 	text-align: center;
-}
-
-/* flexbox container */
-.container {
-  display: flex;
-}
-
-/* 60% column */
-#column1 {
-  flex: 60%;
-}
-
-/* 40% column */
-#column2 {
-	flex: 40%;
-}
-
+  }
+  
+  .flex {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	text-align: center;
+  }
+  
+  .left {
+	width: 60%;
+  }
+  
+  .right {
+	width: 40%;
+  }
+  
+  .point, .point-border {
+	fill:green;
+  }
+  
+  .point:hover, .point-border:hover {
+	fill:pink;
+  }
+  
+  .point-border {
+	stroke-width: 3px;
+	stroke: yellow;
+  }
+  
+  .bar {
+	fill: lightblue;
+  }
+  
+  .bar:hover {
+	fill: navy;
+  }
+  
+  .tooltip {
+  position: absolute;
+  background-color: grey;
+  padding: 5px;
+  }
