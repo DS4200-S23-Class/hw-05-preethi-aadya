@@ -1,63 +1,51 @@
-/* sets all font to arial */
 body {
 	font-family: Arial;
-  font-size: 15px;
   }
   
-/* center the columns*/
   h1, h2 {
 	text-align: center;
   }
-
-/* center acknowledgements*/
-  h3 {
-    text-align: center
-  }
   
-/* flex box styling */
+  h3 {
+    text-align: center;
+  }
   .flex {
 	display: flex;
 	flex-direction: row;
+	/*flex-wrap: nowrap;
+	justify-content: space-between;*/ 
 	text-align: center;
   }
   
-  /* create 60% column*/
   .left {
 	width: 60%;
   }
   
-  /* create 40% column*/
   .right {
 	width: 40%;
   }
   
-  /* scatterplot plot colors */
   .point, .point-border {
 	fill:green;
   }
   
-  /* hover color on scatterplot*/
   .point:hover, .point-border:hover {
 	fill:pink;
   }
   
-  /* scatterplot border color and width*/
   .point-border {
-	stroke-width: 5px;
+	stroke-width: 3px;
 	stroke: yellow;
   }
   
-  /* color for the bar graph*/
   .bar {
 	fill: lightblue;
   }
-
-  /* hover color for the bar graph*/
+  
   .bar:hover {
 	fill: purple;
   }
   
-  /* tooltip styling */
   .tooltip {
   position: absolute;
   background-color: white;
