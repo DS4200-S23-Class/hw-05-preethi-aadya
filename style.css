@@ -31,12 +31,12 @@ body {
   
   /* color the scatterplot points */
   .point, .point-border {
-	fill:orangered;
+	fill:green;
   }
 
   /* color for when you hover on scatterplot points */
   .point:hover, .point-border:hover {
-	fill:navy;
+	fill:pink;
   }
   
   /* border color for scatterplot points */
@@ -47,7 +47,7 @@ body {
   
   /* bar plot bar color */
   .bar {
-	fill: pink;
+	fill: lightBlue;
   }
   
   /* bar plot hover color */
