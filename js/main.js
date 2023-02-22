@@ -32,7 +32,7 @@ d3.csv("data/scatter-data.csv").then((DATA) => {
         .append("circle")
         .attr("cx", (d) => { return (X_SCALE(d.x) + MARGINS.left); })
         .attr("cy", (d) => { return (Y_SCALE(d.y) + MARGINS.top) ; })
-        .attr("r", 8)
+        .attr("r", 6)
         .attr("class", "point");
 
 	// Adds the axises to the scatter plot 
@@ -61,13 +61,17 @@ d3.csv("data/scatter-data.csv").then((DATA) => {
 
     // adds the new point the user inputs on to the plot 
     function addPoint() {
-        let xCoord = document.getElementById("x-coord").value;
-        let yCoord =  document.getElementById("y-coord").value;
+        let xCoord = document.getElementById("x-coord");
+        let yCoord =  document.getElementById("y-coord");
+
+        let x = xCoord.value;
+        let y = yCoord.value;
+
 
         FRAME1.append("circle")
-            .attr("cx", (d) => { return (X_SCALE(xCoord) + MARGINS.left); })
-            .attr("cy", (d) => { return (Y_SCALE(yCoord) + MARGINS.top) ; })
-            .attr("r", 10)
+            .attr("cx", (d) => { return (X_SCALE(x) + MARGINS.left); })
+            .attr("cy", (d) => { return (Y_SCALE(y) + MARGINS.top) ; })
+            .attr("r", 6)
             .attr("class", "point")
             .on("click", pointClicked);
     }
@@ -116,11 +120,11 @@ d3.csv("data/bar-data.csv").then((DATA) => {
 	FRAME2.append("g")
 		.attr("transform", "translate(" + MARGINS.left + "," + (VIS_HEIGHT + MARGINS.top) + ")")
 		.call(d3.axisBottom(X_SCALE).ticks(7))
-		.attr("font-size", '15px');  
+		.attr("font-size", '20px');  
 	FRAME2.append("g")
 		.attr("transform", "translate(" + MARGINS.left + "," + (MARGINS.bottom) + ")")
 		.call(d3.axisLeft(Y_SCALE).ticks(10))
-		.attr("font-size", '15px');
+		.attr("font-size", '20px');
 
 	// Tooltip 
     const TOOLTIP = d3.select("#vis2")

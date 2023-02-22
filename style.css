@@ -1,51 +1,61 @@
+/* make all the font arial */
 body {
 	font-family: Arial;
   }
   
+/* align the columns centered */
   h1, h2 {
 	text-align: center;
   }
-  
+/* center the acknowledgements */
   h3 {
     text-align: center;
   }
+
+  /* flex box alignment */
   .flex {
 	display: flex;
 	flex-direction: row;
-	/*flex-wrap: nowrap;
-	justify-content: space-between;*/ 
 	text-align: center;
   }
   
+  /* create 60% left column */
   .left {
 	width: 60%;
   }
   
+  /* create 40% right column */
   .right {
 	width: 40%;
   }
   
+  /* color the scatterplot points */
   .point, .point-border {
-	fill:green;
+	fill:orangered;
   }
-  
+
+  /* color for when you hover on scatterplot points */
   .point:hover, .point-border:hover {
-	fill:pink;
+	fill:navy;
   }
   
+  /* border color for scatterplot points */
   .point-border {
 	stroke-width: 3px;
 	stroke: yellow;
   }
   
+  /* bar plot bar color */
   .bar {
-	fill: lightblue;
+	fill: pink;
   }
   
+  /* bar plot hover color */
   .bar:hover {
 	fill: purple;
   }
   
+  /* tooltip styling */
   .tooltip {
   position: absolute;
   background-color: white;
