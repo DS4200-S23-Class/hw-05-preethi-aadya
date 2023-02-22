@@ -5,17 +5,17 @@ const MARGINS = {left:50, right:50, top:50, bottom:50};
 const VIS_HEIGHT = FRAME_HEIGHT - (MARGINS.top + MARGINS.bottom);
 const VIS_WIDTH = FRAME_WIDTH - (MARGINS.left + MARGINS.right);
 
-// create svg in vis1 div
+// create a frame to add the svg in vis1 div
 const FRAME1 = d3.select("#vis1")
     .append("svg")
     .attr("height", FRAME_HEIGHT)
     .attr("width", FRAME_WIDTH)
     .attr("class", "frame");
 
-// read scatter plot data
+// read in the scatter plot csv
 d3.csv("data/scatter-data.csv").then((DATA) => {
 
-    // Scaling constants
+    // Scaling the constants to map x and y values 
     const X_SCALE = d3.scaleLinear()
         .domain([0, 10])
         .range([0, VIS_WIDTH]);
@@ -23,72 +23,81 @@ d3.csv("data/scatter-data.csv").then((DATA) => {
         .domain([10, 0])
         .range([0, VIS_HEIGHT]);
 
-	// Plots each of the data points
+
+	// Plots the data points on to the scatter plot 
 	FRAME1.selectAll("points")
         .data(DATA)
         .enter()
         .append("circle")
         .attr("cx", (d) => { return (X_SCALE(d.x) + MARGINS.left); })
         .attr("cy", (d) => { return (Y_SCALE(d.y) + MARGINS.top) ; })
-        .attr("r", 10)
+        .attr("r", 6)
         .attr("class", "point");
 
-	// Add both axis' to vis1
+	// Adds the axises to the scatter plot 
 	FRAME1.append("g")
 		.attr("transform", "translate(" + MARGINS.left + "," + (VIS_HEIGHT + MARGINS.top) + ")")
 		.call(d3.axisBottom(X_SCALE).ticks(10))
-        .attr("font-size", "15px");
+        .attr("font-size", "30px");
 	FRAME1.append("g")
 		.attr("transform", "translate(" + MARGINS.left + "," + (MARGINS.bottom) + ")")
 		.call(d3.axisLeft(Y_SCALE).ticks(10))
-        .attr("font-size", "15px");
+        .attr("font-size", "30px");
 
-    // function for adding last point text
-    function clickedPoint() {
-        // Print this point coordinates on the right side
-        let x_coord = d3.select(this).attr("cx");
-        let y_coord = d3.select(this).attr("cy");
+    // displays the last point clicked text 
+    function pointClicked() {
 
-        x_coord = Math.round(X_SCALE.invert(x_coord - MARGINS.left));
-        y_coord = Math.round(Y_SCALE.invert(y_coord - MARGINS.top));
+        let xCoord = d3.select(this).attr("cx");
+        let yCoord = d3.select(this).attr("cy");
+
+        xCoord = Math.round(X_SCALE.invert(xCoord - MARGINS.left));
+        yCoord = Math.round(Y_SCALE.invert(yCoord - MARGINS.top));
         
-        document.getElementById("recent_point").innerHTML = "Last Point Clicked: (" + x_coord + "," + y_coord + ")";
+        document.getElementById("last_point").innerHTML = "Last Point Clicked: (" + xCoord + "," + yCoord + ")";
 
-        // Toggles the border for each click of the point by adding a new class to the point
         this.classList.toggle('point-border');
     }
 
-    // function to add new point to the scatter
-    function newPoint() {
-        let x_coord = document.getElementById("x-coord").value;
-        let y_coord =  document.getElementById("y-coord").value;
+    // adds the new point the user inputs on to the plot 
+    function addPoint() {
+        let xCoord = document.getElementById("x-coord");
+        let yCoord =  document.getElementById("y-coord");
+
+        let x1 = xVal.value;
+        let y1 = yVal.value;
+
+        let x = (x *50);
+        let y = 350-(y*30)
 
         FRAME1.append("circle")
-            .attr("cx", (d) => { return (X_SCALE(x_coord) + MARGINS.left); })
-            .attr("cy", (d) => { return (Y_SCALE(y_coord) + MARGINS.top) ; })
-            .attr("r", 10)
+            .attr("cx", (d) => { return (X_SCALE(x) + MARGINS.left); })
+            .attr("cy", (d) => { return (Y_SCALE(y) + MARGINS.top) ; })
+            .attr("r", 6)
             .attr("class", "point")
-            .on("click", clickedPoint);
+            .on("click", pointClicked);
     }
     
-    // event listener for adding and clicking the points in vis1
-    d3.selectAll("#enter").on("click", newPoint);
-    d3.selectAll(".point").on("click", clickedPoint);
+    // event listeners 
+    d3.selectAll("#enter").on("click", addPoint);
+    d3.selectAll(".point").on("click", pointClicked);
 });
 
-// create svg in vis2 div
+
+
+
+// create a frame to add the svg in vis2 div
 const FRAME2 = d3.select("#vis2")
     .append("svg")
     .attr("height", FRAME_HEIGHT)
     .attr("width", FRAME_WIDTH)
     .attr("class", "frame"); 
 
-// read bar chart data
+// reads in the bar chart csv
 d3.csv("data/bar-data.csv").then((DATA) => {
-    // find the max Y for the scaling
+    
+    // the max Y used for scaling
 	const MAX_Y = d3.max(DATA, (d) => { return parseInt(d.amount); });
 
-    // Scaling constants
 	const X_SCALE = d3.scaleBand()
         .domain(DATA.map(function(d) { return d.category; }))
         .range([0, VIS_WIDTH])
@@ -97,7 +106,7 @@ d3.csv("data/bar-data.csv").then((DATA) => {
         .domain([(MAX_Y+1), 0])
         .range([0, VIS_HEIGHT]);
 
-    // Plots each of the bars
+    // Plots onto the graph 
     FRAME2.selectAll("bars")  
         .data(DATA)
         .enter()       
@@ -108,7 +117,7 @@ d3.csv("data/bar-data.csv").then((DATA) => {
             .attr("height", (d) => { return VIS_HEIGHT - Y_SCALE(d.amount); })
             .attr("class", "bar") 
 
-	// Add both axis' to vis2
+	// Adds the axises to vis2
 	FRAME2.append("g")
 		.attr("transform", "translate(" + MARGINS.left + "," + (VIS_HEIGHT + MARGINS.top) + ")")
 		.call(d3.axisBottom(X_SCALE).ticks(7))
@@ -118,32 +127,33 @@ d3.csv("data/bar-data.csv").then((DATA) => {
 		.call(d3.axisLeft(Y_SCALE).ticks(10))
 		.attr("font-size", '15px');
 
-	// Tooltip for bar plot
+	// Tooltip 
     const TOOLTIP = d3.select("#vis2")
         .append("div")
         .attr("class", "tooltip")
         .style("opacity", 0);
 
-    // Show tool tip when mouse hovers over a bar
-    function showToolTip(){
+   
+    // shows the tooltip 
+    function hoverToolTip(){
         TOOLTIP.style("opacity", 1);
     }
 
-    // Hide tool tip when mouse leaves the area of a bar
-    function hideToolTip(){
+    // hides the tooltip 
+    function mouseOutToolTip(){
         TOOLTIP.style("opacity", 0);
     }
 
-    // Moves the tool tip based on where the mouse is, and shows the values of the bar
+    // moves the tool tip
     function moveToolTip(event, d){
         TOOLTIP.html("Category " + d.category + "<br>Value: " + d.amount)
             .style("left", (event.pageX + 10) + "px")
             .style("top", (event.pageY - 50) + "px");
     }
 
-    // Add event listeners for the mouse events on the bars
+    // event listeners 
     d3.selectAll(".bar")
-        .on("mouseover", showToolTip)
-        .on("mouseleave", hideToolTip)
+        .on("mouseover", hoverToolTip)
+        .on("mouseleave", mouseOutToolTip)
         .on("mousemove", moveToolTip);
 });  
