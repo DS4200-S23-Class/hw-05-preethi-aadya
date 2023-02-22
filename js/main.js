@@ -2,6 +2,7 @@
 const FRAME_HEIGHT = 500;
 const FRAME_WIDTH = 500;
 const MARGINS = {left:50, right:50, top:50, bottom:50};
+
 const VIS_HEIGHT = FRAME_HEIGHT - (MARGINS.top + MARGINS.bottom);
 const VIS_WIDTH = FRAME_WIDTH - (MARGINS.left + MARGINS.right);
 
@@ -12,7 +13,7 @@ const FRAME1 = d3.select("#vis1")
     .attr("width", FRAME_WIDTH)
     .attr("class", "frame");
 
-// read in the scatter plot csv
+// read in the scatter plot data
 d3.csv("data/scatter-data.csv").then((DATA) => {
 
     // Scaling the constants to map x and y values 
@@ -31,18 +32,18 @@ d3.csv("data/scatter-data.csv").then((DATA) => {
         .append("circle")
         .attr("cx", (d) => { return (X_SCALE(d.x) + MARGINS.left); })
         .attr("cy", (d) => { return (Y_SCALE(d.y) + MARGINS.top) ; })
-        .attr("r", 6)
+        .attr("r", 8)
         .attr("class", "point");
 
 	// Adds the axises to the scatter plot 
 	FRAME1.append("g")
 		.attr("transform", "translate(" + MARGINS.left + "," + (VIS_HEIGHT + MARGINS.top) + ")")
 		.call(d3.axisBottom(X_SCALE).ticks(10))
-        .attr("font-size", "30px");
+        .attr("font-size", "15px");
 	FRAME1.append("g")
 		.attr("transform", "translate(" + MARGINS.left + "," + (MARGINS.bottom) + ")")
 		.call(d3.axisLeft(Y_SCALE).ticks(10))
-        .attr("font-size", "30px");
+        .attr("font-size", "15px");
 
     // displays the last point clicked text 
     function pointClicked() {
@@ -60,19 +61,13 @@ d3.csv("data/scatter-data.csv").then((DATA) => {
 
     // adds the new point the user inputs on to the plot 
     function addPoint() {
-        let xCoord = document.getElementById("x-coord");
-        let yCoord =  document.getElementById("y-coord");
-
-        let x1 = xVal.value;
-        let y1 = yVal.value;
-
-        let x = (x *50);
-        let y = 350-(y*30)
+        let xCoord = document.getElementById("x-coord").value;
+        let yCoord =  document.getElementById("y-coord").value;
 
         FRAME1.append("circle")
-            .attr("cx", (d) => { return (X_SCALE(x) + MARGINS.left); })
-            .attr("cy", (d) => { return (Y_SCALE(y) + MARGINS.top) ; })
-            .attr("r", 6)
+            .attr("cx", (d) => { return (X_SCALE(xCoord) + MARGINS.left); })
+            .attr("cy", (d) => { return (Y_SCALE(yCoord) + MARGINS.top) ; })
+            .attr("r", 10)
             .attr("class", "point")
             .on("click", pointClicked);
     }
@@ -92,7 +87,7 @@ const FRAME2 = d3.select("#vis2")
     .attr("width", FRAME_WIDTH)
     .attr("class", "frame"); 
 
-// reads in the bar chart csv
+// reads the bar chart data
 d3.csv("data/bar-data.csv").then((DATA) => {
     
     // the max Y used for scaling
